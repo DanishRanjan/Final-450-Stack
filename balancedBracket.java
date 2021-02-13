@@ -11,41 +11,40 @@ public class balancedBracket {
 				st.push(ch);
 			} else if (ch == ')') {
 				boolean val = handleClosing(st, '(');
-				if(val==false) {
+				if (val == false) {
 					System.out.println(val);
 					return;
 				}
-				
+
 			} else if (ch == '}') {
 				boolean val = handleClosing(st, '{');
-				if(val==false) {
+				if (val == false) {
 					System.out.println(val);
 					return;
 				}
-				
+
 			} else if (ch == ']') {
 				boolean val = handleClosing(st, '[');
-				if(val==false) {
+				if (val == false) {
 					System.out.println(val);
 					return;
 				}
 			}
 		}
-		if(st.size()==0) {
+		if (st.size() == 0) { //if stack size is zero after all pop and push , then its balanced bracket
 			System.out.println(true);
-		}else {
+		} else {
 			System.out.println(false);
 		}
 
 	}
 
 	public static boolean handleClosing(Stack<Character> st, char correspondingOpeningCharacter) {
-		if (st.size() == 0) {      //extra opening Bracket case
+		if (st.size() == 0) { // extra opening Bracket case
 			return false;
-		}
-		else if(st.peek() != correspondingOpeningCharacter) {   //peek k time iska counter part nhi h
+		} else if (st.peek() != correspondingOpeningCharacter) { // peek k time iska counter part nhi mila
 			return false;
-		}else  {
+		} else {
 			st.pop();
 			return true;
 		}
