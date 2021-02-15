@@ -1,50 +1,50 @@
 import java.io.*;
 import java.util.*;
 public class largestAreaHistogram {
-public static void main(String args[]) {
+public static void main(String args[]) throws IOException {
 	  BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 	    int n = Integer.parseInt(br.readLine());
-	    int[] arr = new int[n];
+	    int[] heights = new int[n];
 	    for(int i = 0; i < n; i++){
-	       arr[i] = Integer.parseInt(br.readLine());
+	       heights[i] = Integer.parseInt(br.readLine());
 	    }
-	    int[] rb = new int[arr.length];//nse index on the right
+	    int[] rightBoundry = new int[heights.length];//nse index on the right
 	    Stack<Integer> st = new Stack<>();
-	    st.push(arr.length-1);
-	    rb[arr.length-1] = arr.length;
-	    for(int i=arr.length-2;i>=0;i--){
-	        while(st.size()>0 && arr[i]<=arr[st.peek()]){
+	    st.push(heights.length-1);
+	    rightBoundry[heights.length-1] = heights.length;
+	    for(int i=heights.length-2;i>=0;i--){
+	        while(st.size()>0 && heights[i]<=heights[st.peek()]){
 	            st.pop();
 	        }
 	        if(st.size()==0){
-	            rb[i] = arr.length;
+	            rightBoundry[i] = heights.length;
 	        }else{
-	            rb[i] = st.peek();
+	            rightBoundry[i] = st.peek();
 	        }
 	        st.push(i);
 	    }
 	   
-	   int[] lb = new int[arr.length]; //nse index on the left
+	   int[] leftBoundry = new int[heights.length]; //nse index on the left
 	   st = new Stack<>();
 	    st.push(0);
-	    rb[0] = -1;
-	    for(int i=1;i<arr.length;i++){
-	        while(st.size()>0 && arr[i]<=arr[st.peek()]){
+	    rightBoundry[0] = -1;
+	    for(int i=1;i<heights.length;i++){
+	        while(st.size()>0 && heights[i]<=heights[st.peek()]){
 	            st.pop();
 	        }
 	        if(st.size()==0){
-	            lb[i] = -1;
+	            leftBoundry[i] = -1;
 	        }else{
-	            lb[i] = st.peek();
+	            leftBoundry[i] = st.peek();
 	        }
 	        st.push(i);
 	    }
 	   
 	   int maxArea = 0;
-	   for(int i=0;i<arr.length;i++){
-	       int width = rb[i]-lb[i]-1;
-	       int area  = arr[i]*width;
+	   for(int i=0;i<heights.length;i++){
+	       int width = rightBoundry[i]-leftBoundry[i]-1;
+	       int area  = heights[i]*width;
 	       if(area>maxArea){
 	           maxArea = area;
 	       }
