@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class QueueToStackAdaptor {
+public class QueueToStackAdaptorPushEfficient {
 
   public static class QueueToStackAdapter {
     Queue<Integer> mainQ;
